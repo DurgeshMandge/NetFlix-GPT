@@ -20,3 +20,4 @@
 
 - create-react-app
 - configured tailwind css into app
+- install n use formic library to work with forms
