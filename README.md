@@ -7,6 +7,7 @@
   - sign-up/in toggle
   - validation
   - useRef() hook
+- Authentication
 
 
 # Features
