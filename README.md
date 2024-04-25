@@ -9,6 +9,7 @@ https://main--enchanting-cassata-ebdee9.netlify.app/
   - validation
   - useRef() hook
 - Authentication
+  - firebase google backend
 
 
 # Features
