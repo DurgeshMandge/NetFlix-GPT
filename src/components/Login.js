@@ -1,9 +1,22 @@
 import Header from "./Header";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { validateEmailPass } from "../utils/validate";
 
 const Login = () =>{
 
     const [isSignUp,setIsSignUp] = useState(false);
+    const [errorMsg,setErrorMsg] = useState(null);
+
+    const email = useRef(null);
+    const passWord = useRef(null);
+    const name = useRef(null);
+
+    const handleOnSubmit = () =>{
+        const msg = validateEmailPass(email.current.value,name.current.value,passWord.current.value);
+        setErrorMsg(msg)
+
+        //login - Authentication
+    }
 
     const handleClick = () =>{
         setIsSignUp(!isSignUp)
@@ -17,25 +30,30 @@ const Login = () =>{
                     alt="bg"
                 />
             </div>
-        <form className="absolute w-1/4 p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
+        <form onSubmit={(e)=>e.preventDefault()} className="absolute w-1/4 p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
                 <h1 className="font-bold text-3xl py-4">{isSignUp?"Sign-Up":"Sign-In"}</h1>
-                {isSignUp && <input 
+                {isSignUp && <input
+                    ref={name} 
                     type="text" 
                     placeholder="Full Name" 
                     className="p-4 my-4 w-full bg-gray-700"
                 />}
                 <input 
+                    ref={email}
                     type="text" 
                     placeholder="email" 
                     className="p-4 my-4 w-full bg-gray-700"
                 />
                 <input 
+                    ref={passWord}
                     type="password" 
                     placeholder="password" 
                     className="p-4 my-4 w-full bg-gray-700"
                 />
+                <p className="text-red-500 font-bold py-2 text-lg">{errorMsg}</p>
                 <button 
                     className="p-4 my-4 bg-red-700 w-full"
+                    onClick={handleOnSubmit}
                 >
                     {isSignUp?"Sign-Up":"Sign-In"}
                 </button>
