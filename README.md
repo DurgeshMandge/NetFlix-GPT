@@ -1,3 +1,14 @@
+# Flow
+- Create React App
+- Configure Tailwind CSS
+- Header
+- Routing - react-browser-router
+- Login
+  - sign-up/in toggle
+  - validation
+  - useRef() hook
+
+
 # Features
 
 - Login/Sign Up
