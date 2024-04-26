@@ -13,7 +13,7 @@
 - Authentication
   - firebase google backend
 - Create Redux-Store
-  - save all user object in redux-store
+  - save all user object in redux-store @reduxjs/toolkit react-redux
 
 
 # Features
