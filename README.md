@@ -12,6 +12,8 @@
   - useRef() hook
 - Authentication
   - firebase google backend
+- Create Redux-Store
+  - save all user object in redux-store
 
 
 # Features
