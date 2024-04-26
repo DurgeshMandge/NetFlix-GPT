@@ -1,16 +1,22 @@
 import Header from "./Header";
 import { useState, useRef } from "react";
 import { validateEmailPass } from "../utils/validate";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword , updateProfile} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () =>{
-
+    const dispatch = useDispatch();
     const [isSignUp,setIsSignUp] = useState(true);
     const [errorMsg,setErrorMsg] = useState(null);
+    const navigate = useNavigate();
 
     const email = useRef(null);
     const passWord = useRef(null);
+    const name = useRef(null)
+
 
     const handleOnSubmit = () =>{
         const msg = validateEmailPass(email.current.value,passWord.current.value);
@@ -28,6 +34,20 @@ const Login = () =>{
             )
                 .then((userCredential) => {
                     const user = userCredential.user;
+
+                    updateProfile(user, {
+                        displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/117802796?v=4"
+                      })
+                      
+                      .then(() => {
+                        // Profile updated!
+                        const {uid, email, displayName, photoURL} = auth.currentUser;
+                        dispatch(addUser({uid : uid, email : email, displayName : displayName, photoURL: photoURL}));
+                        navigate("/browse")
+                      }).catch((error) => {
+                        // An error occurred
+                        setErrorMsg(error)
+                      });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -45,6 +65,15 @@ const Login = () =>{
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
+                    updateProfile(user, {
+                        displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/117802796?v=4"
+                      }).then(() => {
+                        // Profile updated!
+                        navigate("/browse")
+                      }).catch((error) => {
+                        // An error occurred
+                        setErrorMsg(error)
+                      });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -70,6 +99,7 @@ const Login = () =>{
         <form onSubmit={(e)=>e.preventDefault()} className="absolute w-1/4 p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
                 <h1 className="font-bold text-3xl py-4">{isSignUp?"Sign-Up":"Sign-In"}</h1>
                 {isSignUp && <input
+                    ref={name}
                     type="text" 
                     placeholder="Full Name" 
                     className="p-4 my-4 w-full bg-gray-700"
