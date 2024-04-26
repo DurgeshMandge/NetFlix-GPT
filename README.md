@@ -1,5 +1,6 @@
-- https://netflixgpt-c3d11.web.app/
 - https://main--enchanting-cassata-ebdee9.netlify.app/
+    or
+- https://netflixgpt-c3d11.web.app/
 # Flow
 - Create React App
 - Configure Tailwind CSS
