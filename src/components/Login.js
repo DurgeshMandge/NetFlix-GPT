@@ -1,24 +1,61 @@
 import Header from "./Header";
 import { useState, useRef } from "react";
 import { validateEmailPass } from "../utils/validate";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () =>{
 
-    const [isSignUp,setIsSignUp] = useState(false);
+    const [isSignUp,setIsSignUp] = useState(true);
     const [errorMsg,setErrorMsg] = useState(null);
 
     const email = useRef(null);
     const passWord = useRef(null);
-    const name = useRef(null);
 
     const handleOnSubmit = () =>{
-        const msg = validateEmailPass(email.current.value,name.current.value,passWord.current.value);
+        const msg = validateEmailPass(email.current.value,passWord.current.value);
         setErrorMsg(msg)
-
+        if(errorMsg) return;
+        
         //login - Authentication
+        if(isSignUp){
+            // sign up
+            
+            createUserWithEmailAndPassword(
+                auth, 
+                email.current.value, 
+                passWord.current.value
+            )
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode," : ",errorMessage)
+                });
+
+        }else{
+            // sign in
+
+            signInWithEmailAndPassword(auth, 
+                email.current.value, 
+                passWord.current.value
+            )
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode," : ",errorMessage)
+                });
+            }
+
     }
 
-    const handleClick = () =>{
+    const handleFormToggle = () =>{
         setIsSignUp(!isSignUp)
     }
 
@@ -33,7 +70,6 @@ const Login = () =>{
         <form onSubmit={(e)=>e.preventDefault()} className="absolute w-1/4 p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
                 <h1 className="font-bold text-3xl py-4">{isSignUp?"Sign-Up":"Sign-In"}</h1>
                 {isSignUp && <input
-                    ref={name} 
                     type="text" 
                     placeholder="Full Name" 
                     className="p-4 my-4 w-full bg-gray-700"
@@ -50,14 +86,14 @@ const Login = () =>{
                     placeholder="password" 
                     className="p-4 my-4 w-full bg-gray-700"
                 />
-                <p className="text-red-500 font-bold py-2 text-lg">{errorMsg}</p>
+                {errorMsg && <p className="text-red-500 font-bold py-2 text-lg">{errorMsg}</p>}
                 <button 
                     className="p-4 my-4 bg-red-700 w-full"
                     onClick={handleOnSubmit}
                 >
                     {isSignUp?"Sign-Up":"Sign-In"}
                 </button>
-                <p className="py-6 cursor-pointer" onClick={handleClick}>
+                <p className="py-6 cursor-pointer" onClick={handleFormToggle}>
                     {isSignUp
                         ?"Already regestered ? Sign-In"
                         :"No Account? Sign Up Now !!"
