@@ -11,7 +11,7 @@
   - validation
   - useRef() hook
 - Authentication
-  - firebase google backend
+  - firebase google backend (sign-up sign-in onAuthStateChange)
 - Create Redux-Store
   - save all user object in redux-store @reduxjs/toolkit react-redux
 
