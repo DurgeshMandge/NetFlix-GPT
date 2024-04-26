@@ -6,6 +6,9 @@
 - Configure Tailwind CSS
 - Header
 - Routing - react-browser-router
+    - createBrowserRouter([{},{}...])
+    - <RouterProvider/>
+    - useNavigate()
 - Login
   - sign-up/in toggle
   - validation
