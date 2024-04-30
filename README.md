@@ -7,7 +7,7 @@
 - Header
 - Routing - react-browser-router
     - createBrowserRouter([{},{}...])
-    - <RouterProvider/>
+    - RouterProvider
     - useNavigate()
 - Login
   - sign-up/in toggle
@@ -17,7 +17,7 @@
   - firebase google backend (sign-up sign-in onAuthStateChange)
   - Create Redux-Store
     - save all user object in redux-store @reduxjs/toolkit react-redux
-- TMDB api
+- fetch movies from `TMDB api`
 
 
 # Features
