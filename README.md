@@ -18,6 +18,9 @@
   - Create Redux-Store
     - save all user object in redux-store @reduxjs/toolkit react-redux
   - update user profile
+- Bugfixes :
+      - update the user details after sign in
+      - restrict navigation of "/browse" without log in, "/sign in" without log out
 - fetch movies from `TMDB api`
 
 
