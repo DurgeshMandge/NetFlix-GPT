@@ -3,7 +3,26 @@
 - https://main--enchanting-cassata-ebdee9.netlify.app/
     -    or
 - https://netflixgpt-c3d11.web.app/
-# Flow
+  
+# Features
+
+- Login/Sign Up
+    - Sign In/ Up form
+    - Redirect to Browse Page
+
+- Browse (after Authentication)
+    - Header
+    - Main Movie
+        - Tailer in Background
+        - Title & Description
+        - Movie Suggestions 
+            - Movie List * N
+
+- Netflix GPT
+    - Search Bar
+    - Movie Suggestions
+
+# Development Flow
 - Create React App
 - Configure Tailwind CSS
 - Header
@@ -25,24 +44,6 @@
       - restrict navigation of "/browse" without log in, "/sign in" without log out
 - fetch movies from `TMDB api`
 
-
-# Features
-
-- Login/Sign Up
-    - Sign In/ Up form
-    - Redirect to Browse Page
-
-- Browse (after Authentication)
-    - Header
-    - Main Movie
-        - Tailer in Background
-        - Title & Description
-        - Movie Suggestions 
-            - Movie List * N
-
-- Netflix GPT
-    - Search Bar
-    - Movie Suggestions
 
 # Netflix GPT
 
