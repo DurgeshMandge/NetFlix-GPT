@@ -42,6 +42,7 @@
 - Bugfixes :
       - update the user details after sign in
       - restrict navigation of "/browse" without log in, "/sign in" without log out
+      - Unsubscribe to `onAuthChanged()` calllback when `header unmounts`
 - fetch movies from `TMDB api`
 
 
